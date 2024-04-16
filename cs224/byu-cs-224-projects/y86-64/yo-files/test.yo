@@ -1,0 +1,16 @@
+0x0000: 30f0ffffffffffffff7f   | irmovq $9223372036854775807, %rax    # Load maximum positive value into %rax
+0x000a: 30f30500000000000000   | irmovq $5, %rbx                       # Load 5 into %rbx
+0x0014: 6130                   | subq %rbx, %rax
+                               | 
+                               | # Test 2: Negative overflow
+0x0016: 30f00100000000000080   | irmovq $-9223372036854775807, %rax   # Load maximum negative value into %rax
+0x0020: 30f30500000000000000   | irmovq $5, %rbx                       # Load 5 into %rbx
+0x002a: 6130                   | subq %rbx, %rax 
+                               | 
+0x002c: 30f0ffffffffffffffff   | irmovq $0xFFFFFFFFFFFFFFFF, %rax     # Load a value into %rax
+0x0036: 30f3f0debc9a78563412   | irmovq $0x123456789ABCDEF0, %rbx     # Load another value into %rbx
+0x0040: 6330                   | xorq %rbx, %rax 
+                               | 
+0x0042: 30f0ffffffffffffffff   | irmovq $0xFFFFFFFFFFFFFFFF, %rax     # Load a value into %rax
+0x004c: 30f3f0debc9a78563412   | irmovq $0x123456789ABCDEF0, %rbx     # Load another value into %rbx
+0x0056: 6330                   | xorq %rbx, %rax 
